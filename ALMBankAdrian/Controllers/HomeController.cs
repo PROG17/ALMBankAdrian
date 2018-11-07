@@ -10,9 +10,14 @@ namespace ALMBankAdrian.Controllers
 {
     public class HomeController : Controller
     {
+        private BankRepository _repo;
+        public HomeController(BankRepository repo)
+        {
+            _repo = repo;
+        }
         public IActionResult Index()
         {
-            return View();
+            return View(_repo);
         }
 
         public IActionResult About()

@@ -1,11 +1,28 @@
-﻿@{
+﻿@model BankRepository
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="row">
     <div class="col-md-12">
         <h2>Adrians Bank</h2>
-
+		
     </div>
+	<div>
+		<ul>
+			@foreach (var item in Model.Customers)
+			{
+				<li>Customer#: @item.CustomerID - Name: @item.Name </li>
+			}
+		</ul>
+
+		<ul>
+			@foreach (var item in Model.Accounts)
+			{
+				<li>Account#: @item.AccountNumber - Owner: @item.Customer.Name - $@item.Balance</li>
+			}
+		</ul>
+</div>
    
 </div>
