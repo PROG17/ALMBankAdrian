@@ -29,5 +29,40 @@ namespace ALMBankAdrian.Models
         public List<Customer> Customers { get; set; }
 
         public List<Account> Accounts { get; set; }
+
+        public string Withdraw(int accountNumber, decimal amount)
+        {
+            var targetAccount = Accounts.FirstOrDefault(a => a.AccountNumber == accountNumber);
+
+            if (targetAccount == null)
+            {
+                return "Couldn't find account number";
+            }
+
+            if (targetAccount.Balance >= amount)
+            {
+                targetAccount.Balance = targetAccount.Balance - amount;
+                return "Success";
+            }
+            else
+            {
+                return "Insufficient balance";
+            }
+         
+        }
+
+        public string Deposit(int accountNumber, decimal amount)
+        {
+            var targetAccount = Accounts.FirstOrDefault(a => a.AccountNumber == accountNumber);
+            if (targetAccount == null)
+            {
+                return "Couldn't find account number";
+            }
+
+            targetAccount.Balance = targetAccount.Balance + amount;
+            return "Success";
+        }
     }
+
+
 }
