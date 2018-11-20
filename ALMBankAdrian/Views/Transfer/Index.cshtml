@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>TRANSFER</h2>
+
+
+<form action="/Transfer/Index" method="post">
+    <label name="accountNumber">From Account</label> <input type="text" name="fromAccount" />
+    <label name="tooAccount">Too Account</label> <input type="text" name="tooAccount" />
+    <label name="amount">Amount</label> <input type="text" name="amount" />
+
+    <input type="submit" name="action" value="Transfer" />
+</form>
+
+
+<h4>@ViewBag.Result</h4>
