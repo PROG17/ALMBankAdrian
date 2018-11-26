@@ -62,7 +62,35 @@ namespace ALMBankAdrian.Models
             targetAccount.Balance = targetAccount.Balance + amount;
             return "Success";
         }
+
+
+        public string Transfer(int FromAccountNumber, int ToAccountNumber, decimal amount)
+        {
+            var from = Accounts.FirstOrDefault(a => a.AccountNumber == FromAccountNumber);
+            var too = Accounts.FirstOrDefault(a => a.AccountNumber == ToAccountNumber);
+
+            if (too != null && from != null)
+            {
+                if (from.Balance >= amount)
+                {
+                    Withdraw(from.AccountNumber, amount);
+                    Deposit(too.AccountNumber, amount);
+
+                    return "Överförde " + amount + "kr \nFrån: " + FromAccountNumber + " \nTill: " + ToAccountNumber;
+
+                }
+                else
+                    return "Saknas pengar";
+
+                
+
+            }
+
+
+            return "har du rätt kontoNr? ";
+
+        }
+
+
     }
-
-
 }

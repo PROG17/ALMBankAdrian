@@ -81,5 +81,46 @@ namespace ALMBankAdrian.Test
             Assert.Equal(2000m, TestAccount.Balance);
         }
 
+
+
+
+        [Fact]
+        public void TransferTest_Denied()
+        {
+            BankRepository repo = new BankRepository();
+            Customer cust1 = new Customer { Name = "cust1", CustomerID = 22 };
+            Account acc1 = new Account { AccountNumber = 6, Customer = cust1, Balance = 1 };
+            Customer cust2 = new Customer { Name = "cust2", CustomerID = 23 };
+            Account acc2 = new Account { AccountNumber = 7, Customer = cust2, Balance = 0 };
+
+            repo.Accounts.Add(acc1);
+            repo.Accounts.Add(acc2);
+
+            var result = repo.Transfer(6,7, 5);
+
+            Assert.Equal("Saknas pengar", result);
+
+            Assert.Equal(1, acc1.Balance);
+            Assert.Equal(0, acc2.Balance);
+        }
+
+        [Fact]
+        public void TransferTest()
+        {
+            BankRepository repo = new BankRepository();
+            Customer cust1 = new Customer { Name = "cust1", CustomerID = 22 };
+            Account acc1 = new Account { AccountNumber = 6, Customer = cust1, Balance = 1000 };
+            Customer cust2 = new Customer { Name = "cust2", CustomerID = 23 };
+            Account acc2 = new Account { AccountNumber = 7, Customer = cust2, Balance = 0 };
+
+            repo.Accounts.Add(acc1);
+            repo.Accounts.Add(acc2);
+
+            var result = repo.Transfer(6,7,1000);
+
+            Assert.Equal(0, acc1.Balance);
+            Assert.Equal(1000, acc2.Balance);
+        }
+
     }
 }
