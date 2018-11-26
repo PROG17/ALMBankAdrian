@@ -23,7 +23,7 @@ namespace ALMBankAdrian.Controllers
         [HttpPost]
         public IActionResult Index(string tooAccount, string fromAccount, string amount)
         {
-            if (tooAccount != null && fromAccount !=null && amount != null)
+            if (tooAccount != null || fromAccount !=null || amount != null)
             {
                 ViewBag.Result = "all info måste ges..";
                 return View();
